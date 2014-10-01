@@ -22,8 +22,30 @@ namespace _1DV402.S2.L1A
 
         public bool MakeGuess(int number)
         {
-            return true;
+            _count++;
+            
+            int guessNumber = MaxNumberOfGuesses - _count++;
+           
+            if (number ==_number)
+            {
+                Console.WriteLine("{0} är rätt, har{1} gissning kvar", number,guessNumber);
+                    return true;
+            }
+
+            if (number < _number) 
+            {
+                Console.WriteLine("{0} för lågt, har {1} gissning kvar" , number,guessNumber);
+                return false;
+            }
+            if (number > _number) 
+            {
+                Console.WriteLine("{0} för högt, har {1} har gissning kvar", number,guessNumber);
+                return false;
+            }
+            return false;
         }
+
+
        
         public SecretNumber()//konstructor
         {
