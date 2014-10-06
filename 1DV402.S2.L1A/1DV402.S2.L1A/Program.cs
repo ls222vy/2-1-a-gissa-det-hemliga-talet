@@ -36,6 +36,7 @@ namespace _1DV402.S2.L1A
                 for (int i = 1; i <= SecretNumber.MaxNumberOfGuesses; i++)
                 {
                     // Läs in en gissning i det slutna intervallet mellan 1 och 100.
+
                     Console.ForegroundColor = ConsoleColor.White;
                     do
                     {

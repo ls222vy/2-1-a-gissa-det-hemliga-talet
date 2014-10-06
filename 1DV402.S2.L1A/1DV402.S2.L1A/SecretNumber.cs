@@ -13,45 +13,62 @@ namespace _1DV402.S2.L1A
        
         public const int MaxNumberOfGuesses = 7;
 
-        public void Initialize() 
+         public void Initialize() 
         {
             Random myRandom = new Random();
-            _number = myRandom.Next(1, 101);
-            _count = 0;
-        }
-
+            
+            _number = myRandom.Next(1, 101);// tilldelar objektet number ett värde mellan 1-100.
+            
+            _count = 0;// Deklarerar att räkningen ska börja med 0
+       
+         }
         public bool MakeGuess(int number)
         {
-            _count++;
-            
-            int guessNumber = MaxNumberOfGuesses - _count++;
-           
-            if (number ==_number)
+
+           //number = MaxNumberOfGuesses - _count;
+
+            if (number < 1 || number > 100)
             {
-                Console.WriteLine("{0} är rätt, har{1} gissning kvar", number,guessNumber);
-                    return true;
+                throw new ArgumentOutOfRangeException();
             }
 
-            if (number < _number) 
+            if (_count >= MaxNumberOfGuesses)
             {
-                Console.WriteLine("{0} för lågt, har {1} gissning kvar" , number,guessNumber);
-                return false;
+                throw new ApplicationException();
+
             }
-            if (number > _number) 
+
+            ++_count;
+
+            if (number == _number)
             {
-                Console.WriteLine("{0} för högt, har {1} har gissning kvar", number,guessNumber);
-                return false;
+                Console.WriteLine("Grattis Du Gissar Rätt.Du klarade det på {0} försök.", _count);
+                return true;
             }
+
+            if (number < _number)// Om gissniningen är mindre än det hemliga talet skrivs ett meddelande
+            {
+                Console.WriteLine("{0} är för lågt.Du har {1} gissning kvar.", number,(MaxNumberOfGuesses-_count));
+            }
+           
+            else if (number >_number)// om gissningen är högre än det hemliga talet skrivs ett meddelande.
+            {
+                Console.WriteLine("{0} är för högt. Du har {1} gissining kvar.",number,(MaxNumberOfGuesses-_count));
+            }
+              
+
+           if (_count == MaxNumberOfGuesses)// Skriver ut det hemliga talet 
+              {
+                    Console.WriteLine("Den Hemliga talet är {0}", _number);
+              }
+            // returnera falskt eftersom de misslyckades att vara lika mycket som det hemliga värdet
             return false;
         }
 
-
-       
         public SecretNumber()//konstructor
         {
             Initialize();//anropar initialize
         }
-
 
    }
 
